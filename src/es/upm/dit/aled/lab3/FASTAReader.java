@@ -135,9 +135,16 @@ public class FASTAReader {
 	 * pattern when one has been found to be different.
 	 */
 	private boolean compareImproved(byte[] pattern, int position) throws FASTAException {
-		// TODO
-		return false;
-	}
+		if(position + pattern.length > validBytes) {
+			throw new FASTAException ("Pattern goes beyond the end of the file");
+			}
+		for (int i=0;i<pattern.length;i++) {
+			if(pattern[i] != content[position + i]) {
+				return false;
+			}
+		}
+		return true; 
+		}
 
 	/*
 	 * Improved version of the compare method that returns the number of bytes in
