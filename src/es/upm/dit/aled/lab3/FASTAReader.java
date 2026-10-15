@@ -209,8 +209,17 @@ public class FASTAReader {
 	 *         pattern (with up to 1 errors) in the data.
 	 */
 	public List<Integer> searchSNV(byte[] pattern) {
-		// TODO
-		return null;
+		List<Integer> res = new ArrayList<>();
+		for (int i=0; i<validBytes -1;i++) {
+			try {
+				if (compareNumErrors(pattern,i)==0||compareNumErrors(pattern,i)==1) {
+					res.add(i);
+				}
+			}catch(FASTAException e) {
+				break;
+			}
+		}
+		return res;
 	}
 
 	public static void main(String[] args) {
